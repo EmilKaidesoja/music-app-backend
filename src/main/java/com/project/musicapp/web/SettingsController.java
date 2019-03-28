@@ -47,7 +47,7 @@ public class SettingsController {
 		List<PrevSearch> searches = psrepository.findByUserId(userId);
 		Iterator<PrevSearch> it = searches.iterator();
 		while (it.hasNext()) {
-			psrepository.deleteById(it.next().getSearchId());
+			psrepository.deleteById(it.next().getId());
 		}
 	}
 

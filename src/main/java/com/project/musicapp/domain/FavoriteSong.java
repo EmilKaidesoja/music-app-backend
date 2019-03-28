@@ -7,10 +7,10 @@ import javax.persistence.*;
 public class FavoriteSong {
 	@Id
 	private Long id; // this is the musixmatch commontrack_id therefore no auto generation
+	private String artistName, songName;
 	@Column (name = "userId", nullable = false)
 	private Long userId; //saves the usersId to work as a foreign key
-	private String artistName, songName;
-	
+
 	public FavoriteSong() {}
 
 	public FavoriteSong(Long id, Long userId, String artistName, String songName) {

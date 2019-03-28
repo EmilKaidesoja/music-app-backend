@@ -8,7 +8,7 @@ public class PrevSearch {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long searchId;
+	private Long id;
 	private String searchWord;
 	@Column(name = "userId", nullable = false)
 	private Long userId;
@@ -33,8 +33,8 @@ public class PrevSearch {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	public Long getSearchId() {
-		return searchId;
+	public Long getId() {
+		return id;
 	}
 
 }
