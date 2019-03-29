@@ -3,7 +3,6 @@ package com.project.musicapp.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "favorite_song")
 public class FavoriteSong {
 	@Id
 	private Long id; // this is the musixmatch commontrack_id therefore no auto generation

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS user (
     PRIMARY KEY(id)
     );
     
- CREATE TABLE IF NOT EXISTS previousSearch (
+ CREATE TABLE IF NOT EXISTS previous_search (
     id 			  bigint		 	NOT NULL,
     searchWord  	varchar(50)  NOT NULL	,
     userId 		 bigint	 NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS user (
     FOREIGN KEY(userId) REFERENCES user(id)
     );
     
- CREATE TABLE IF NOT EXISTS favoriteSong (
+ CREATE TABLE IF NOT EXISTS favorite_song (
     id 			bigint	 		NOT NULL,
     artistName 	varchar(50) NOT NULL,
     songName 	varchar(50) 	NOT NULL,

@@ -3,7 +3,6 @@ package com.project.musicapp.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "previous_search")
 public class PrevSearch {
 
 	@Id
