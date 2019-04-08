@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -30,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			http.csrf().disable().cors()
 		.and()
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/login").permitAll().antMatchers("/h2-console/**").permitAll().antMatchers("/register/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/login").permitAll().antMatchers("/register/**").permitAll().antMatchers("/spotify/**").permitAll()
 			.anyRequest().authenticated()
 		.and()
 		 // Filter for the api/login requests
@@ -39,9 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         // Filter for other requests to check JWT in header
         .addFilterBefore(new AuthenticationFilter(),
                 UsernamePasswordAuthenticationFilter.class); 
-			
-			//disabled only that the in memory h2 database will be visible
-		http.headers().frameOptions().disable();
 		}
 
 	@Bean
