@@ -1,5 +1,6 @@
 package com.project.musicapp.web;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,9 @@ public class WebController {
 	public @ResponseBody List<PrevSearch> GetPrevSearchesById(@PathVariable("token") String token) {
 		String username = AuthenticationService.parseToken(token);
 		User user = urepository.findByUsername(username);
-		return psrepository.findByUserId(user.getId());
+		List<PrevSearch> searches = psrepository.findByUserId(user.getId());
+		Collections.reverse(searches);
+		return searches;
 	}
 	// fetch favorite songs based on user name
 	@RequestMapping(value = "/favoriteSongs/{token}", method = RequestMethod.GET)

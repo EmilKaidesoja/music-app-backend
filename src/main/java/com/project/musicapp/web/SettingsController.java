@@ -57,7 +57,7 @@ public class SettingsController {
 		String username = AuthenticationService.parseToken(token);
 		User user = urepository.findByUsername(username);
 		//check if the user requests a new username and if the new username is available
-		if(newUser.getUsername() == username){
+		if(newUser.getUsername() != username){
 			if(urepository.findByUsername(newUser.getUsername()) == null) {
 				newUser.setId(user.getId());
 				newUser.setPassword(user.getPassword());

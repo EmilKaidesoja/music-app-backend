@@ -1,15 +1,12 @@
 package com.project.musicapp.web;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -29,10 +25,11 @@ import com.project.musicapp.service.AuthenticationService;
 
 @Controller
 public class SpotifyController {
+	
 	private final String CLIENT_ID = "3700d2c69a8248ff9297c02f70a25631";
-	private final String REDIRECT_URI = "http://localhost:8080/spotify/callback";
+	private final String REDIRECT_URI = "https://musicapp-backend.me/musicapp/spotify/callback";
 	private final String CLIENT_SECRET = "469360b9c8f34bbb9b8eab570ca33443";
-	private final String FRONTEND_URL = "http://localhost:3000";
+	private final String FRONTEND_URL = "https://my-musicapp.me";
 	private final String SCOPES = "streaming%20user-read-birthdate%20user-read-email%20user-read-private%20user-modify-playback-state%20user-read-currently-playing";
 
 	@Autowired
@@ -83,16 +80,16 @@ public class SpotifyController {
 			// This should never happen
 		} catch (HttpClientErrorException e) {
 			String status = e.getResponseBodyAsString();
-			System.out.println(e + " *** " + status);
+			System.out.println(e + " " + status);
 			return "redirect:" + FRONTEND_URL;
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
 		return null;
