@@ -56,16 +56,18 @@ public class SettingsController {
 	public String updateInformation(@RequestBody User newUser, @PathVariable("token") String token) {
 		String username = AuthenticationService.parseToken(token);
 		User user = urepository.findByUsername(username);
-		//check if the user requests a new username and if the new username is available
-		if(newUser.getUsername() != username){
-			if(urepository.findByUsername(newUser.getUsername()) == null) {
+
+		// check if the user requests a new username and if the new username is
+		// available
+		if (!newUser.getUsername().equals(user.getUsername())) {
+			if (urepository.findByUsername(newUser.getUsername()) == null) {
 				newUser.setId(user.getId());
 				newUser.setPassword(user.getPassword());
 				urepository.save(newUser);
-			}else {
+			} else {
 				return "reserved";
 			}
-		}else {
+		} else {
 			newUser.setId(user.getId());
 			newUser.setPassword(user.getPassword());
 			urepository.save(newUser);
@@ -76,8 +78,8 @@ public class SettingsController {
 				.signWith(SignatureAlgorithm.HS512, AuthenticationService.SIGNINGKEY).compact();
 		return "Bearer " + newToken;
 	}
-	
-	@RequestMapping(value="/update/password/{token}", method = RequestMethod.PUT)
+
+	@RequestMapping(value = "/update/password/{token}", method = RequestMethod.PUT)
 	public void changePassword(@RequestBody PasswordChange password, @PathVariable("token") String token) {
 		String username = AuthenticationService.parseToken(token);
 		User user = urepository.findByUsername(username);
